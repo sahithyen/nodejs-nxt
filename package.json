@@ -1,0 +1,27 @@
+{
+  "name": "nodejs-nxt",
+  "author": "Sahithyen Kanaganayagam",
+  "description": "Library for LEGO MINDSTORMS NXT",
+  "keywords": [
+    "lego",
+    "mindstorms",
+    "nxt",
+    "library"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sahithyen/nodejs-nxt.git"
+  },
+  "license": "GPLv3",
+  "dependencies": {
+    "serialport": "2.x.x"
+  },
+  "version": "0.9.0",
+  "main": "./nxt.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "jshintConfig": {
+    "esnext": true
+  }
+}
