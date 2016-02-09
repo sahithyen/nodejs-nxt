@@ -934,4 +934,6 @@ exports.NXT = function(portName, isBluethooth) {
       responseCallbacks[command] = null;
     }
   }.bind(this);
+
+  init();
 };
