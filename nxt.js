@@ -306,9 +306,9 @@ exports.NXT = function(portName, isBluethooth) {
     command[0] = CommandType.Direct;
     command[1] = DirectCommand.PlayTone;
     command[2] = frequency & 0xFF;
-    command[3] = (frequency / 0x100) & 0xFF;
+    command[3] = (frequency >>> 8) & 0xFF;
     command[4] = duration & 0xFF;
-    command[5] = (duration / 0x100) & 0xFF;
+    command[5] = (duration >>> 8) & 0xFF;
 
     // Send reply if callback is defined
     if (callback) {
@@ -346,10 +346,10 @@ exports.NXT = function(portName, isBluethooth) {
     command[6] = turnRatio;
     command[7] = runState;
     command[8] = tachoLimit & 0xFF;
-    command[9] = (tachoLimit / 0x100) & 0xFF;
-    command[10] = (tachoLimit / 0x10000) & 0xFF;
-    command[11] = (tachoLimit / 0x1000000) & 0xFF;
-    command[12] = (tachoLimit / 0x100000000) & 0xFF;
+    command[9] = (tachoLimit >>> 8) & 0xFF;
+    command[10] = (tachoLimit >>> 16) & 0xFF;
+    command[11] = (tachoLimit >>> 24) & 0xFF;
+    command[12] = (tachoLimit >>> 32) & 0xFF;
 
     // Send reply if callback is defined
     if (callback) {
@@ -430,21 +430,21 @@ exports.NXT = function(portName, isBluethooth) {
           result.turnRatio = data[7 + shift];
           result.runState = data[8 + shift];
           result.tachoLimit = data[9 + shift];
-          result.tachoLimit += data[10 + shift] * 0x100;
-          result.tachoLimit += data[11 + shift] * 0x10000;
-          result.tachoLimit += data[12 + shift] * 0x1000000;
+          result.tachoLimit += data[10 + shift] << 8;
+          result.tachoLimit += data[11 + shift] << 16;
+          result.tachoLimit += data[12 + shift] << 24;
           result.tachoCount = data[13 + shift];
-          result.tachoCount += data[14 + shift] * 0x100;
-          result.tachoCount += data[15 + shift] * 0x10000;
-          result.tachoCount += data[16 + shift] * 0x1000000;
+          result.tachoCount += data[14 + shift] << 8;
+          result.tachoCount += data[15 + shift] << 16;
+          result.tachoCount += data[16 + shift] << 24;
           result.blockTachoCount = data[17 + shift];
-          result.blockTachoCount += data[18 + shift] * 0x100;
-          result.blockTachoCount += data[19 + shift] * 0x10000;
-          result.blockTachoCount += data[20 + shift] * 0x1000000;
+          result.blockTachoCount += data[18 + shift] << 8;
+          result.blockTachoCount += data[19 + shift] << 16;
+          result.blockTachoCount += data[20 + shift] << 24;
           result.rotationCount = data[21 + shift];
-          result.rotationCount += data[22 + shift] * 0x100;
-          result.rotationCount += data[23 + shift] * 0x10000;
-          result.rotationCount += data[24 + shift] * 0x1000000;
+          result.rotationCount += data[22 + shift] << 8;
+          result.rotationCount += data[23 + shift] << 16;
+          result.rotationCount += data[24 + shift] << 24;
         }
 
         if (callback) callback(error, result);
@@ -626,7 +626,7 @@ exports.NXT = function(portName, isBluethooth) {
 
         if (!error) {
           result.voltage = data[3 + shift];
-          result.voltage += data[4 + shift] * 0x100;
+          result.voltage += data[4 + shift] << 8;
         }
 
         if (callback) callback(error, result);
@@ -691,9 +691,9 @@ exports.NXT = function(portName, isBluethooth) {
 
         if (!error) {
           result.currentSleepTimeLimit = data[3 + shift];
-          result.currentSleepTimeLimit += data[4 + shift] * 0x100;
-          result.currentSleepTimeLimit += data[5 + shift] * 0x10000;
-          result.currentSleepTimeLimit += data[6 + shift] * 0x1000000;
+          result.currentSleepTimeLimit += data[4 + shift] << 8;
+          result.currentSleepTimeLimit += data[5 + shift] << 16;
+          result.currentSleepTimeLimit += data[6 + shift] << 24;
         }
 
         if (callback) callback(error, result);
