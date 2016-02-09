@@ -16,7 +16,7 @@
   "dependencies": {
     "serialport": "2.x.x"
   },
-  "version": "0.9.1",
+  "version": "0.9.0",
   "main": "./nxt.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
