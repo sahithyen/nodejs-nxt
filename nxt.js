@@ -182,6 +182,13 @@ exports.NXT = function(portName, isBluethooth) {
   const shift = isBluethooth ? 2 : 0;
   const serialPort = new serialport.SerialPort(portName, null, false);
 
+  // Response callbacks
+  let responseCallbacks = {};
+
+  var init = function () {
+    serialPort.on('data', dataReceived);
+  }.bind(this);
+
   // Connection functions
   this.Connect = function(callback) {
     serialPort.open(callback);
@@ -912,15 +919,19 @@ exports.NXT = function(portName, isBluethooth) {
   }.bind(this);
 
   var getResponse = function(command, callback) {
-    serialPort.on('data', function(data) {
-      if (command === data[1 + shift]) {
-        const status = data[2 + shift];
-        const errorMessage = ErrorMessages[status];
+    responseCallbacks[command] = callback;
+  }.bind(this);
 
-        const error = status === 0 ? null : new Error(errorMessage);
+  var dataReceived = function(data) {
+    var command = data[1 + shift];
 
-        callback(error, status, data);
-      }
-    });
+    if (responseCallbacks[command]) {
+      const status = data[2 + shift];
+      const error = status === 0 ? null : new Error(ErrorMessages[status]);
+
+      responseCallbacks[command](error, status, data);
+
+      responseCallbacks[command] = null;
+    }
   }.bind(this);
 };
