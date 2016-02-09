@@ -22,31 +22,28 @@ The following example code connects with the NXT through the serial port '/dev/t
 var nxt = require('nodejs-nxt');
 var nxt0 = new nxt.NXT('/dev/tty.NXT-DevB', true);
 
-nxt0.Connect(function (error) {
-    if (error) {
-        console.log('Could not connect to the device!');
-        return;
-    }
-    
-    nxt0.PlayTone(1000, 2000, function (error) {
-        if (error) {
-            console.log('Could not play the tone!');
-            return;
-        }
-        
-        nxt0.Disconnect();
+nxt0.Connect(function(error) {
+  if (error) {
+    console.log('Could not connect to the device!');
+  } else {
+    nxt0.PlayTone(1000, 2000, function(error) {
+      if (error) {
+        console.log('Could not play the tone!');
+      }
+
+      nxt0.Disconnect();
     });
+  }
 });
 ```
 
 ## Dependancy
 
-Nodejs-nxt needs the package [node-serialport](https://www.npmjs.com/package/serialport) to communicate with the nxt.
+Nodejs-nxt needs the package [node-serialport](https://www.npmjs.com/package/serialport) to communicate with the NXT.
 
 ## Known bugs
 
  - The ultrasonic-sensor doesn't work yet
- - Not waiting for the previous command to be finished is critical
 
 ## To do
 
