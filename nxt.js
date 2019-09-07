@@ -43,7 +43,7 @@ exports.Power = {
 exports.Mode = {
   MotorOn: 0x01,
   Brake: 0x02,
-  Regulated: 0x04
+  Regulated: 0x05
 };
 
 exports.RegulationMode = {
