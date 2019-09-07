@@ -28,6 +28,18 @@ exports.MotorPort = {
   C: 0x02
 };
 
+exports.Power = {
+  n100: 0x9C,
+  n75: 0xB5,
+  n50: 0xCE,
+  n25: 0xE7,
+  0: 0x00,
+  25: 0x19,
+  50: 0x32,
+  75: 0x4B,
+  100: 0x64
+};
+
 exports.Mode = {
   MotorOn: 0x01,
   Brake: 0x02,
@@ -38,6 +50,18 @@ exports.RegulationMode = {
   Idle: 0x00,
   MotorSpeed: 0x01,
   MotorSync: 0x02
+};
+
+exports.TurnRatio = {
+  n100: 0x9C,
+  n75: 0xB5,
+  n50: 0xCE,
+  n25: 0xE7,
+  0: 0x00,
+  25: 0x19,
+  50: 0x32,
+  75: 0x4B,
+  100: 0x64
 };
 
 exports.RunState = {
