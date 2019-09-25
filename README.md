@@ -54,7 +54,7 @@ Nodejs-nxt needs the package [node-serialport](https://www.npmjs.com/package/ser
 
 ## Contributors
 
-@maoberlehner has done all the work for version 0.9.3
+[@maoberlehner](https://github.com/maoberlehner) has done all the work for version 0.9.3
 
 ## License
 
