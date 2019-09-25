@@ -19,7 +19,7 @@
 **/
 
 // Dependencies
-const serialport = require('serialport');
+const SerialPort = require('serialport');
 
 // Enumerations
 exports.MotorPort = {
@@ -28,16 +28,40 @@ exports.MotorPort = {
   C: 0x02
 };
 
+exports.Power = {
+  n100: 0x9C,
+  n75: 0xB5,
+  n50: 0xCE,
+  n25: 0xE7,
+  0: 0x00,
+  25: 0x19,
+  50: 0x32,
+  75: 0x4B,
+  100: 0x64
+};
+
 exports.Mode = {
   MotorOn: 0x01,
   Brake: 0x02,
-  Regulated: 0x04
+  Regulated: 0x05
 };
 
 exports.RegulationMode = {
   Idle: 0x00,
   MotorSpeed: 0x01,
   MotorSync: 0x02
+};
+
+exports.TurnRatio = {
+  n100: 0x9C,
+  n75: 0xB5,
+  n50: 0xCE,
+  n25: 0xE7,
+  0: 0x00,
+  25: 0x19,
+  50: 0x32,
+  75: 0x4B,
+  100: 0x64
 };
 
 exports.RunState = {
@@ -174,24 +198,21 @@ const ErrorMessages = {
   0xFF: 'Bad arguments'
 };
 
+const isBluethooth = true;
+
 // Class
-exports.NXT = function(portName, isBluethooth) {
+exports.NXT = function(portName, initCallback) {
   'use strict';
 
   // Serial port variables
   const shift = isBluethooth ? 2 : 0;
-  const serialPort = new serialport.SerialPort(portName, null, false);
+  const serialPort = new SerialPort(portName, undefined, initCallback);
 
   // Response callbacks
   let responseCallbacks = {};
 
   var init = function () {
     serialPort.on('data', dataReceived);
-  }.bind(this);
-
-  // Connection functions
-  this.Connect = function(callback) {
-    serialPort.open(callback);
   }.bind(this);
 
   this.Disconnect = function(callback) {
