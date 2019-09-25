@@ -52,6 +52,10 @@ Nodejs-nxt needs the package [node-serialport](https://www.npmjs.com/package/ser
  - Add system commands
  - Add another layer of functions for ease of use
 
+## Contributors
+
+@maoberlehner has done all the work for version 0.9.3
+
 ## License
 
 GPLv3
